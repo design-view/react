@@ -5,8 +5,8 @@ function Wrapper({ children }) {
         border: '2px solid black',
         padding: 16
     };
-    console.log(children);
     return <div style={style}>{ children }</div>
 }
 
 export default Wrapper;
+
