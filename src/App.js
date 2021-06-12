@@ -1,25 +1,17 @@
-import logo from './logo.svg';
+import React from 'react';
+import Hello from './Hello';
+//css불러오기
 import './App.css';
-
+import Wrapper from './Wrapper';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Wrapper>
+      <Hello name="react" color="pink"/>
+      <Hello color="pink"/>
+    </Wrapper>
   );
 }
-
+Hello.defaultProps = {
+  name: '이름없음'
+}
 export default App;

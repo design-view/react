@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+//페이지에서 아이디가 root인 것을 찾아서 app을 거기에 넣겠다.
+//public폴더안에 index.html안에 아이디가 root인 요소가 있음
 ReactDOM.render(
   <React.StrictMode>
     <App />
