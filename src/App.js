@@ -1,10 +1,10 @@
 import React from 'react';
 //css불러오기
 import './App.css';
-import InputSample2 from './InputSample2';
+import UserList from './UserList';
 function App() {
   return (
-    <InputSample2 />
+    <UserList />
   );
 }
 
