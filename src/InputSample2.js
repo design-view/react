@@ -1,6 +1,8 @@
-import React,{useState} from 'react';
+import React,{useState, useRef} from 'react';
 
 function InputSample2() {
+    //돔에 접근할 변수를 선언
+    const nameInput = useRef();
     //객체를 담는다.
     const [inputs,setInputs] = useState({
         name: "",
@@ -25,10 +27,11 @@ function InputSample2() {
             name: "",
             nickname: ""
         })
+        nameInput.current.focus();
     }; 
     return (
         <div>
-            <input placeholder="이름" name="name" value={name} onChange={onChange}/>
+            <input placeholder="이름" name="name" value={name} onChange={onChange} ref={nameInput}/>
             <input placeholder="닉네임" name="nickname" value={nickname} onChange={onChange}/>
             <button onClick = {onReset}>초기화</button>
             <div>
