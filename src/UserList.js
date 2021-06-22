@@ -1,26 +1,24 @@
-import React from "react";
+import React, from "react";
 
-function UserList( { users }) {
-    
-    function User({ user }){
-        return (
-            <div>
-                <b>{user.username}</b>
-                <span>({user.email})</span>
-            </div>
-        )
-    }
+function User({user, onRemove, onToggle}) {
     return (
         <div>
-        {/* <User user={users[0]} />
-        <User user={users[1]} />
-        <User user={users[2]} /> */}
-        
-        {
-            users.map(user => (<User user={user} key={user.id} />)
-            )
-        }
+            <b style={{
+                color: user.active ? 'green' : 'black'
+            }} onClick={() => {onToggle(user.id)}}>{user.username}</b>
+            <span>{user.email}</span>
+            <button onClick={() => { onRemove(user.id)}}>삭제</button>
         </div>
-    );
+    )
+}
+
+function UserList({users, onRemove, onToggle}) {
+   
+    return (
+        <div>
+            {users.map((user) => (<User user={user} key={user.id} onRemove={onRemove} onToggle={onToggle}/>))}
+            
+        </div>
+    )
 }
 export default UserList;

@@ -8,17 +8,18 @@ function InputSample2() {
         name: "",
         nickname: ""
     });
+    
     //inputs에 담김 이름과 닉네임을 각각 변수에 담는다.
     const { name, nickname } = inputs;
     const onChange = (e) => {
         //글자가 변경되는 이벤트발생시
         //이벤트의 타겟의 name과 value를 구조분해할당한다.
         const { name, value} = e.target;
-        console.log(e.target, name, value);
         setInputs({
             ...inputs,
             [name]:value
         })
+        console.log(inputs,name);
     }
     
     
