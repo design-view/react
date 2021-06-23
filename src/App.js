@@ -1,6 +1,7 @@
 import React, { useRef, useReducer, useMemo, useCallback } from 'react';
 import UserList from './UserList';
 import CreateUser from './CreateUser';
+import useInputs from './useInputs';
 
 function countActiveUsers(users) {
   console.log('활성 사용자 수를 세는중...');
@@ -9,11 +10,9 @@ function countActiveUsers(users) {
 //useState를 useReducer로 변경하기
 //초기상태를 컴포넌트 밖에 선언하기 
 //App에서 사용할 inputs와 users의 초기상태를 담아두기
+
+//useInput에서 관리할 거라서 inputs를 삭제함
 const initialState = {
-  inputs : {
-    username: '',
-    email: '',
-  },
   users : [
     {
       id: 1,
@@ -36,16 +35,9 @@ const initialState = {
   ]
 }
 //함수 만들기
+//useInput에서 관리할 거라서 case CHANGE_INPUT을삭제
 function reducer(state, action){
    switch (action.type) {
-     case 'CHANGE_INPUT':
-       return {
-         ...state,
-         inputs: {
-           ...state.inputs,
-           [action.name]: action.value
-         }
-       };
     case 'CREATE_USER':
       return {
         inputs: initialState.inputs,
@@ -81,22 +73,20 @@ function App() {
   //구조분해할당으로 각각 값을추출
   //state가 객체이므로 객체 구조분해 할당을 함
   const { users } = state;
-  //inputs도 객체이므로 객체 구조분해 할당을 함
-  //username과 email추출함
-  const { username, email } = state.inputs;
+  //useInput사용하기 
+  //useInputs의 초기값으로 {username:'',email;''}을 전달
+  //구조분해할당으로 추출
+  const [form, onChange, reset] = useInputs({
+    username: '',
+    email:'',
+  })
+  const { username, email } = form;
+  
 
   const nextId = useRef(4);
 
-  //onChange만들기
-  const onChange = useCallback( e => {
-    const { name, value } =e.target;
-    dispatch({
-      type: 'CHANGE_INPUT',
-      name,
-      value
-    })
-    console.log(value);
-  },[]);
+  //useInputs onChange삭제
+
 
   
   //onCreate만들기
@@ -110,7 +100,8 @@ function App() {
       }
     });
     nextId.current += 1;
-  },[username,email]);
+    reset();
+  },[username,email,reset]);
 
   //onToggle만들기
   const onToggle = useCallback((id) => {
